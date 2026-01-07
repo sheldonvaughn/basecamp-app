@@ -166,21 +166,14 @@ app.get('/api/organization', withAuth, async (req, res) => {
       return res.json({ organization: userOrganizations[userId] });
     }
 
-    // Create a new organization for the user
+    // Create a new organization for the user (without domain initially)
     const organizationName = req.user.firstName
       ? `${req.user.firstName}'s Organization`
       : 'My Organization';
 
-    const emailDomain = req.user.email.split('@')[1];
-
     const organization = await workos.organizations.createOrganization({
       name: organizationName,
-      domainData: [
-        {
-          domain: emailDomain,
-          state: 'pending',
-        },
-      ],
+      // Don't add domains initially - user can add them in Admin Portal
     });
 
     // Store the organization ID
@@ -189,7 +182,7 @@ app.get('/api/organization', withAuth, async (req, res) => {
     return res.json({ organization });
   } catch (error) {
     console.error('Error creating organization:', error);
-    return res.status(500).json({ error: 'Failed to create organization' });
+    return res.status(500).json({ error: 'Failed to create organization', message: error.message });
   }
 });
 
@@ -206,16 +199,9 @@ app.post('/api/admin-portal', withAuth, async (req, res) => {
         ? `${req.user.firstName}'s Organization`
         : 'My Organization';
 
-      const emailDomain = req.user.email.split('@')[1];
-
       organization = await workos.organizations.createOrganization({
         name: organizationName,
-        domainData: [
-          {
-            domain: emailDomain,
-            state: 'pending',
-          },
-        ],
+        // Don't add domains initially - user can add them in Admin Portal
       });
 
       userOrganizations[userId] = organization;
@@ -231,7 +217,11 @@ app.post('/api/admin-portal', withAuth, async (req, res) => {
     return res.json({ link: portalLink.link });
   } catch (error) {
     console.error('Error generating portal link:', error);
-    return res.status(500).json({ error: 'Failed to generate portal link' });
+    return res.status(500).json({
+      error: 'Failed to generate portal link',
+      message: error.message,
+      details: error.toString()
+    });
   }
 });
 

@@ -61,12 +61,20 @@ function SettingsPage() {
       }
 
       const data = await response.json();
+
+      // Check if we got an error response
+      if (!response.ok || !data.link) {
+        console.error('Admin Portal error:', data);
+        alert(`Failed to generate Admin Portal link: ${data.message || data.error || 'Unknown error'}`);
+        setLoadingPortal(false);
+        return;
+      }
+
       // Redirect to Admin Portal
       window.location.href = data.link;
     } catch (error) {
       console.error('Error opening Admin Portal:', error);
       alert('Failed to open Admin Portal. Please try again.');
-    } finally {
       setLoadingPortal(false);
     }
   };
