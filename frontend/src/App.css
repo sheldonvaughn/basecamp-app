@@ -50,6 +50,14 @@ h1 {
   background-color: #0b7dda;
 }
 
+.auth-button.settings {
+  background-color: #666;
+}
+
+.auth-button.settings:hover {
+  background-color: #555;
+}
+
 .message-form {
   display: flex;
   gap: 1rem;

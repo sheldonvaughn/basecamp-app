@@ -111,6 +111,7 @@ function App() {
           {user ? (
             <div className="user-info">
               <span>Welcome, {user.firstName || user.email}!</span>
+              <Link to="/settings" className="auth-button settings">⚙️ Settings</Link>
               <a href={`${AUTH_URL}/logout`} className="auth-button">Sign Out</a>
             </div>
           ) : (

@@ -23,6 +23,9 @@ let messages = [
   { id: 2, text: 'This is a basic example', timestamp: new Date().toISOString() }
 ];
 
+// Store user organizations (in production, use a database)
+let userOrganizations = {};
+
 // Auth middleware function
 async function withAuth(req, res, next) {
   const session = workos.userManagement.loadSealedSession({
@@ -150,6 +153,85 @@ app.get('/user', async (req, res) => {
     return res.json({ user });
   } catch (error) {
     return res.json({ user: null });
+  }
+});
+
+// Admin Portal routes
+app.get('/api/organization', withAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // Check if user already has an organization
+    if (userOrganizations[userId]) {
+      return res.json({ organization: userOrganizations[userId] });
+    }
+
+    // Create a new organization for the user
+    const organizationName = req.user.firstName
+      ? `${req.user.firstName}'s Organization`
+      : 'My Organization';
+
+    const emailDomain = req.user.email.split('@')[1];
+
+    const organization = await workos.organizations.createOrganization({
+      name: organizationName,
+      domainData: [
+        {
+          domain: emailDomain,
+          state: 'pending',
+        },
+      ],
+    });
+
+    // Store the organization ID
+    userOrganizations[userId] = organization;
+
+    return res.json({ organization });
+  } catch (error) {
+    console.error('Error creating organization:', error);
+    return res.status(500).json({ error: 'Failed to create organization' });
+  }
+});
+
+app.post('/api/admin-portal', withAuth, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { intent } = req.body; // sso, dsync, domain_verification, etc.
+
+    // Get or create organization
+    let organization = userOrganizations[userId];
+
+    if (!organization) {
+      const organizationName = req.user.firstName
+        ? `${req.user.firstName}'s Organization`
+        : 'My Organization';
+
+      const emailDomain = req.user.email.split('@')[1];
+
+      organization = await workos.organizations.createOrganization({
+        name: organizationName,
+        domainData: [
+          {
+            domain: emailDomain,
+            state: 'pending',
+          },
+        ],
+      });
+
+      userOrganizations[userId] = organization;
+    }
+
+    // Generate Admin Portal link
+    const portalLink = await workos.portal.generateLink({
+      organization: organization.id,
+      intent: intent || 'sso',
+      returnUrl: 'http://localhost:3000/settings',
+    });
+
+    return res.json({ link: portalLink.link });
+  } catch (error) {
+    console.error('Error generating portal link:', error);
+    return res.status(500).json({ error: 'Failed to generate portal link' });
   }
 });
 
