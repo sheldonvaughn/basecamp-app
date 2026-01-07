@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './App.css'
 
 const API_URL = 'http://localhost:3001/api';
@@ -160,6 +161,12 @@ function App() {
             </div>
           ))
         )}
+      </div>
+
+      <div className="easter-egg-hint">
+        <Link to="/dig-in" className="easter-egg-link">
+          🏀 Think you're a real fan? Prove it.
+        </Link>
       </div>
     </div>
   )

@@ -150,3 +150,29 @@ h1 {
 .delete-button:hover {
   background-color: #da190b;
 }
+
+.easter-egg-hint {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  border-top: 2px solid #eee;
+}
+
+.easter-egg-link {
+  display: inline-block;
+  color: #fec524;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #0e2240 0%, #1d3557 100%);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(14, 34, 64, 0.3);
+}
+
+.easter-egg-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(254, 197, 36, 0.5);
+  color: #fff;
+}

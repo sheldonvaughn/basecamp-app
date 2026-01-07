@@ -1,0 +1,316 @@
+.nuggets-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0e2240 0%, #1d3557 50%, #0e2240 100%);
+  color: white;
+  padding: 2rem;
+}
+
+.nuggets-container.authenticated {
+  background: linear-gradient(135deg, #0e2240 0%, #1d3557 25%, #fec524 50%, #1d3557 75%, #0e2240 100%);
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.nuggets-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nuggets-main-title {
+  font-size: 3rem;
+  color: #fec524;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  margin-bottom: 1rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.championship-banner {
+  font-size: 1.5rem;
+  color: #fff;
+  background: linear-gradient(90deg, #8b2131 0%, #c41e3a 50%, #8b2131 100%);
+  padding: 0.5rem 2rem;
+  display: inline-block;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Login Prompt Styles */
+.login-prompt {
+  max-width: 600px;
+  margin: 5rem auto;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 16px;
+  border: 3px solid #fec524;
+  box-shadow: 0 8px 32px rgba(254, 197, 36, 0.3);
+}
+
+.nuggets-title {
+  font-size: 2.5rem;
+  color: #fec524;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.lock-icon {
+  font-size: 4rem;
+  margin: 1rem 0;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.login-message {
+  font-size: 1.3rem;
+  margin: 1rem 0;
+  color: #fff;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #fec524;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.nuggets-login-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #fec524 0%, #f4a62a 100%);
+  color: #0e2240;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(254, 197, 36, 0.4);
+}
+
+.nuggets-login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(254, 197, 36, 0.6);
+}
+
+.nuggets-facts {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #fec524;
+}
+
+.nuggets-facts p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #fff;
+}
+
+/* User Showcase Styles */
+.user-showcase {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+}
+
+.showcase-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #fec524;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0e2240;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 3px solid #fec524;
+}
+
+.user-card-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.5rem 1rem;
+  background: #0e2240;
+  color: #fec524;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badge.mvp {
+  background: linear-gradient(135deg, #fec524 0%, #f4a62a 100%);
+  color: #0e2240;
+}
+
+.user-details {
+  margin-bottom: 2rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  align-items: center;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: #0e2240;
+  font-size: 1.1rem;
+}
+
+.value {
+  color: #555;
+  font-size: 1.1rem;
+  word-break: break-all;
+}
+
+.json-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 3px solid #fec524;
+}
+
+.json-title {
+  color: #0e2240;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.json-display {
+  background: #0e2240;
+  color: #fec524;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border: 2px solid #fec524;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Facts Grid */
+.nuggets-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+}
+
+.fact-card {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0e2240;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  border: 2px solid #fec524;
+  transition: transform 0.3s ease;
+}
+
+.fact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(254, 197, 36, 0.5);
+}
+
+.fact-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.fact-card h3 {
+  color: #0e2240;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.fact-card p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Back Link */
+.back-link {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.back-link a {
+  color: #fec524;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(254, 197, 36, 0.8);
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fec524;
+  margin-top: 5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nuggets-main-title {
+    font-size: 2rem;
+  }
+
+  .championship-banner {
+    font-size: 1rem;
+  }
+
+  .showcase-title {
+    font-size: 1.5rem;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .nuggets-facts-grid {
+    grid-template-columns: 1fr;
+  }
+}
