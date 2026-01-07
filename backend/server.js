@@ -117,15 +117,21 @@ app.get('/callback', async (req, res) => {
 });
 
 app.get('/logout', async (req, res) => {
-  const session = workos.userManagement.loadSealedSession({
-    sessionData: req.cookies['wos-session'],
-    cookiePassword: process.env.WORKOS_COOKIE_PASSWORD,
-  });
+  try {
+    const session = workos.userManagement.loadSealedSession({
+      sessionData: req.cookies['wos-session'],
+      cookiePassword: process.env.WORKOS_COOKIE_PASSWORD,
+    });
 
-  const url = await session.getLogoutUrl();
+    const url = await session.getLogoutUrl();
 
-  res.clearCookie('wos-session');
-  res.redirect(url);
+    res.clearCookie('wos-session');
+    res.redirect(url);
+  } catch (error) {
+    // If there's no valid session, just clear the cookie and redirect to frontend
+    res.clearCookie('wos-session');
+    res.redirect('http://localhost:3000');
+  }
 });
 
 app.get('/user', async (req, res) => {
